@@ -1,0 +1,31 @@
+▲説明
+
+※この命令は、PC向けネイティブ版なでしこ「[[lnako]]」専用の命令です。ブラウザ版（wnako）やNode.js版（cnako）では動作しません。
+
+指定パスのファイルやディレクトリの詳細情報（stat）を取得し、辞書形式で返します。辞書には種別kind（"file", "directory", "symlink"など）、サイズsize、権限mode、所有者uid/gid、リンク数nlink、タイムスタンプ（atimeNs, mtimeNs, ctimeNs, birthtimeNs: ナノ秒BigInt）などが含まれます。シンボリックリンクの場合はリンク先を追跡した実体の情報を返します。
+
+●仕様
+- 対応環境: [[lnako]]専用 (Web/Node.js非対応)
+- プラグイン: [[plugin_lowlevel]]
+- 分類: ファイルシステム
+- 助詞: PATHを/PATHの/PATHから
+- 戻り値: stat
+- 実装状況: 実装済み
+- 機能ID (capability): `stat`
+- 発生し得るエラー: ENOENT, EACCES, EPERM, ENOTDIR, ELOOP, EINVAL, ENOTSUP
+
+▲利用例
+
+{{{#nako3
+F = 「/tmp/test_stat.bin」を「w+b」でファイル開く。
+Fをファイル閉じる。
+INFO = 「/tmp/test_stat.bin」をファイル詳細情報取得。
+「/tmp/test_stat.bin」をファイルリンク削除。
+INFO[「kind」]を表示。
+### lnako表示結果: file
+}}}
+
+▲参考
+
+- [[plugin_lowlevel/シンボリックリンク情報取得]]
+- [[plugin_lowlevel/実体パス取得]]

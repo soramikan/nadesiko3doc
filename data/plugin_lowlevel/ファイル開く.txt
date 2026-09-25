@@ -1,0 +1,31 @@
+▲説明
+
+※この命令は、PC向けネイティブ版なでしこ「[[lnako]]」専用の命令です。ブラウザ版（wnako）やNode.js版（cnako）では動作しません。
+
+指定したパスのファイルを開き、不透明なファイルハンドルオブジェクトを返します。MODEには文字列で読み書きモード（"r", "r+", "w", "w+", "a", "a+" やバイナリ修飾 "b" など）を指定できます。MODEを省略した場合は読み込み専用モードとなります。
+
+●仕様
+- 対応環境: [[lnako]]専用 (Web/Node.js非対応)
+- プラグイン: [[plugin_lowlevel]]
+- 分類: ストリームIO
+- 助詞: PATHをMODEで/PATHを
+- 戻り値: handle
+- 実装状況: 実装済み
+- 機能ID (capability): `stream_file_io`
+- 発生し得るエラー: ENOENT, EACCES, EPERM, EISDIR, EINVAL, EMFILE, ENFILE, ENOTSUP, EROFS, ENOSPC
+
+▲利用例
+
+{{{#nako3
+F = 「/tmp/test_open.txt」を「w+b」でファイル開く。
+Fをファイル閉じる。
+「/tmp/test_open.txt」をファイルリンク削除。
+「ファイル開閉成功」と表示。
+### lnako表示結果: ファイル開閉成功
+}}}
+
+▲参考
+
+- [[plugin_lowlevel/ファイル閉じる]]
+- [[plugin_lowlevel/ファイルバイト読む]]
+- [[plugin_lowlevel/ファイルバイト書く]]

@@ -1,0 +1,31 @@
+▲説明
+
+※この命令は、PC向けネイティブ版なでしこ「[[lnako]]」専用の命令です。ブラウザ版（wnako）やNode.js版（cnako）では動作しません。
+
+シェルを介さず引数配列ARGVを直接指定して外部プロセスを安全に起動し、プロセスハンドルを返します。POSIXのposix_spawnp/execに相当します。OPTIONSには作業ディレクトリcwdや環境変数envなどを指定できます。
+
+●仕様
+- 対応環境: [[lnako]]専用 (Web/Node.js非対応)
+- プラグイン: [[plugin_lowlevel]]
+- 分類: プロセス・端末制御
+- 助詞: ARGVをOPTIONSで/ARGVを
+- 戻り値: handle
+- 実装状況: 実装済み
+- 機能ID (capability): `argv_spawn`
+- 発生し得るエラー: ENOENT, EACCES, EPERM, EINVAL, ENOTSUP
+
+▲利用例
+
+{{{#nako3
+PROC = [「true」]をプロセス起動。
+RES = PROCのプロセス待機。
+もし、(RES[「exitCode」] == 0)ならば
+　　「プロセス実行成功」と表示。
+ここまで
+### lnako表示結果: プロセス実行成功
+}}}
+
+▲参考
+
+- [[plugin_lowlevel/プロセス待機]]
+- [[plugin_lowlevel/シグナル送信]]

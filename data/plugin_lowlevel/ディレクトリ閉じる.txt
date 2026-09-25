@@ -1,0 +1,28 @@
+▲説明
+
+※この命令は、PC向けネイティブ版なでしこ「[[lnako]]」専用の命令です。ブラウザ版（wnako）やNode.js版（cnako）では動作しません。
+
+ディレクトリハンドルを閉じ、走査リソースを解放します。POSIXのclosedirに相当します。
+
+●仕様
+- 対応環境: [[lnako]]専用 (Web/Node.js非対応)
+- プラグイン: [[plugin_lowlevel]]
+- 分類: ディレクトリ走査
+- 助詞: HANDLEを/HANDLEの
+- 戻り値: void
+- 実装状況: 実装済み
+- 機能ID (capability): `dir_iterator`
+- 発生し得るエラー: EBADF
+
+▲利用例
+
+{{{#nako3
+DH = 「/tmp」をディレクトリ開く。
+DHをディレクトリ閉じる。
+「ディレクトリクローズ成功」と表示。
+### lnako表示結果: ディレクトリクローズ成功
+}}}
+
+▲参考
+
+- [[plugin_lowlevel/ディレクトリ開く]]

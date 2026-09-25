@@ -1,0 +1,1 @@
+#include(plugin_lowlevel/シンボリックリンク情報取得)

@@ -1,0 +1,30 @@
+▲説明
+
+※この命令は、PC向けネイティブ版なでしこ「[[lnako]]」専用の命令です。ブラウザ版（wnako）やNode.js版（cnako）では動作しません。
+
+指定パスのファイルリンク（ディレクトリエントリ）を削除します。ハードリンク数が0になるとストレージ上の実体領域が解放されます。POSIXのunlinkに相当します。ディレクトリに対して実行した場合はEISDIRエラーになります。
+
+●仕様
+- 対応環境: [[lnako]]専用 (Web/Node.js非対応)
+- プラグイン: [[plugin_lowlevel]]
+- 分類: ファイルシステム
+- 助詞: PATHを/PATHの
+- 戻り値: void
+- 実装状況: 実装済み
+- 機能ID (capability): `unlink`
+- 発生し得るエラー: ENOENT, EACCES, EPERM, EISDIR, ENOTDIR, ELOOP, EROFS, ENOTSUP, EINVAL
+
+▲利用例
+
+{{{#nako3
+F = 「/tmp/test_unlink.txt」を「w+b」でファイル開く。
+Fをファイル閉じる。
+「/tmp/test_unlink.txt」をファイルリンク削除。
+「削除成功」と表示。
+### lnako表示結果: 削除成功
+}}}
+
+▲参考
+
+- [[plugin_lowlevel/空フォルダ削除]]
+- [[plugin_lowlevel/ファイル開く]]

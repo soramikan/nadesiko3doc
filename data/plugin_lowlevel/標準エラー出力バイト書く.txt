@@ -1,0 +1,28 @@
+▲説明
+
+※この命令は、PC向けネイティブ版なでしこ「[[lnako]]」専用の命令です。ブラウザ版（wnako）やNode.js版（cnako）では動作しません。
+
+標準エラー出力へバイナリデータ（Bytes）を直接書き込みます。実際に書き込まれたバイト数を返します。\n\n生バイナリを出力するため、DocTestでは実行結果を検証していません。
+
+●仕様
+- 対応環境: [[lnako]]専用 (Web/Node.js非対応)
+- プラグイン: [[plugin_lowlevel]]
+- 分類: 標準入出力
+- 助詞: BYTESを/BYTESで
+- 戻り値: number
+- 実装状況: 実装済み
+- 機能ID (capability): `raw_stdio`
+- 発生し得るエラー: EINVAL, EPIPE, ENOSPC, ENOTSUP, EBADF
+
+▲利用例
+
+{{{#nako3
+H = 「sha256」でハッシュ開始。
+B = Hをハッシュ完了。
+Bで標準エラー出力バイト書く。
+}}}
+
+▲参考
+
+- [[plugin_lowlevel/標準エラー出力同期]]
+- [[plugin_lowlevel/標準出力バイト書く]]

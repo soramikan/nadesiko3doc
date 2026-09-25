@@ -1,0 +1,29 @@
+▲説明
+
+※この命令は、PC向けネイティブ版なでしこ「[[lnako]]」専用の命令です。ブラウザ版（wnako）やNode.js版（cnako）では動作しません。
+
+指定パスのファイルシステム情報（ブロックサイズblockSize、総ブロック数blocks、空きブロック数free、利用可能ブロック数available、ファイルノード数filesなど）を辞書形式で取得します。POSIXのstatvfs/statfsに相当します。
+
+●仕様
+- 対応環境: [[lnako]]専用 (Web/Node.js非対応)
+- プラグイン: [[plugin_lowlevel]]
+- 分類: 高度ファイルシステム
+- 助詞: PATHを/PATHの
+- 戻り値: fsInfo
+- 実装状況: 実装済み
+- 機能ID (capability): `statfs`
+- 発生し得るエラー: ENOENT, EACCES, EPERM, ENOTDIR, EINVAL, ENOTSUP
+
+▲利用例
+
+{{{#nako3
+FS = 「/tmp」のファイルシステム情報取得。
+もし、(FS[「blockSize」] > 0)ならば
+　　「FS情報取得成功」と表示。
+ここまで
+### lnako表示結果: FS情報取得成功
+}}}
+
+▲参考
+
+- [[plugin_lowlevel/ファイル詳細情報取得]]

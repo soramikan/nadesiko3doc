@@ -1,0 +1,30 @@
+▲説明
+
+※この命令は、PC向けネイティブ版なでしこ「[[lnako]]」専用の命令です。ブラウザ版（wnako）やNode.js版（cnako）では動作しません。
+
+現在のプロセスの実効グループID（EGID）を数値で取得します。POSIXのgetegidに相当します。
+
+●仕様
+- 対応環境: [[lnako]]専用 (Web/Node.js非対応)
+- プラグイン: [[plugin_lowlevel]]
+- 分類: 権限・属性管理
+- 助詞: なし（引数0）
+- 戻り値: gid
+- 実装状況: 実装済み
+- 機能ID (capability): `uid_gid`
+- 発生し得るエラー: ENOTSUP
+
+▲利用例
+
+{{{#nako3
+EGID取得。
+G = それ。
+もし、(G >= 0)ならば
+　　「EGID取得成功」と表示。
+ここまで
+### lnako表示結果: EGID取得成功
+}}}
+
+▲参考
+
+- [[plugin_lowlevel/GID取得]]

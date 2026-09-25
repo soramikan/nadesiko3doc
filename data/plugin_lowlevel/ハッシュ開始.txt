@@ -1,0 +1,30 @@
+▲説明
+
+※この命令は、PC向けネイティブ版なでしこ「[[lnako]]」専用の命令です。ブラウザ版（wnako）やNode.js版（cnako）では動作しません。
+
+指定したアルゴリズム（"sha256", "sha512", "sha1", "md5"など）による逐次ハッシュ計算を開始し、不透明なハッシュハンドルオブジェクトを返します。
+
+●仕様
+- 対応環境: [[lnako]]専用 (Web/Node.js非対応)
+- プラグイン: [[plugin_lowlevel]]
+- 分類: ハッシュストリーム
+- 助詞: ALGORITHMで/ALGORITHMを
+- 戻り値: handle
+- 実装状況: 実装済み
+- 機能ID (capability): `incremental_hash`
+- 発生し得るエラー: EINVAL, ENOTSUP
+
+▲利用例
+
+{{{#nako3
+H = 「sha256」でハッシュ開始。
+B = Hをハッシュ完了。
+「ハッシュ開始成功」と表示。
+### lnako表示結果: ハッシュ開始成功
+}}}
+
+▲参考
+
+- [[plugin_lowlevel/ハッシュ追加]]
+- [[plugin_lowlevel/ハッシュ完了]]
+- [[plugin_lowlevel/ハッシュ破棄]]

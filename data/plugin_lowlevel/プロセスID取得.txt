@@ -1,0 +1,30 @@
+▲説明
+
+※この命令は、PC向けネイティブ版なでしこ「[[lnako]]」専用の命令です。ブラウザ版（wnako）やNode.js版（cnako）では動作しません。
+
+自プロセスのプロセスID（PID）を取得します。POSIXのgetpidに相当します。
+
+●仕様
+- 対応環境: [[lnako]]専用 (Web/Node.js非対応)
+- プラグイン: [[plugin_lowlevel]]
+- 分類: プロセス・端末制御
+- 助詞: なし（引数0）
+- 戻り値: pid
+- 実装状況: 実装済み
+- 機能ID (capability): `argv_spawn`
+- 発生し得るエラー: ENOTSUP
+
+▲利用例
+
+{{{#nako3
+プロセスID取得。
+PID = それ。
+もし、(PID > 0)ならば
+　　「プロセスID取得成功」と表示。
+ここまで
+### lnako表示結果: プロセスID取得成功
+}}}
+
+▲参考
+
+- [[plugin_lowlevel/親プロセスID取得]]

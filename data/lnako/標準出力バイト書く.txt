@@ -1,0 +1,1 @@
+#include(plugin_lowlevel/標準出力バイト書く)

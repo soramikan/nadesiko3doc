@@ -1,0 +1,34 @@
+▲説明
+
+※この命令は、PC向けネイティブ版なでしこ「[[lnako]]」専用の命令です。ブラウザ版（wnako）やNode.js版（cnako）では動作しません。
+
+指定パスに含まれるシンボリックリンクや相対参照（.や..）をすべて解決した、正規の絶対パス（実体パス）文字列を取得します。POSIXのrealpathに相当します。
+
+●仕様
+- 対応環境: [[lnako]]専用 (Web/Node.js非対応)
+- プラグイン: [[plugin_lowlevel]]
+- 分類: ファイルシステム
+- 助詞: PATHを/PATHの
+- 戻り値: string
+- 実装状況: 実装済み
+- 機能ID (capability): `realpath`
+- 発生し得るエラー: ENOENT, EACCES, EPERM, ENOTDIR, ELOOP, ENOTSUP, EINVAL
+
+▲利用例
+
+{{{#nako3
+F = 「/tmp/test_real_src.txt」を「w+b」でファイル開く。
+Fをファイル閉じる。
+「/tmp/test_real_src.txt」を「/tmp/test_real_link.txt」へシンボリックリンク作成。
+REAL = 「/tmp/test_real_link.txt」の実体パス取得。
+「/tmp/test_real_link.txt」をファイルリンク削除。
+「/tmp/test_real_src.txt」をファイルリンク削除。
+FNAME = REALからファイル名抽出。
+FNAMEを表示。
+### lnako表示結果: test_real_src.txt
+}}}
+
+▲参考
+
+- [[plugin_lowlevel/シンボリックリンク先取得]]
+- [[plugin_lowlevel/ファイル詳細情報取得]]

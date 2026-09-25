@@ -1,0 +1,34 @@
+▲説明
+
+※この命令は、PC向けネイティブ版なでしこ「[[lnako]]」専用の命令です。ブラウザ版（wnako）やNode.js版（cnako）では動作しません。
+
+指定ディレクトリ内のエントリを1件ずつコールバック関数に渡して反復実行します。コールバック関数にはエントリ辞書ENT（name, type）が引数として渡されます。
+
+●仕様
+- 対応環境: [[lnako]]専用 (Web/Node.js非対応)
+- プラグイン: [[plugin_lowlevel]]
+- 分類: ディレクトリ走査
+- 助詞: PATHをCALLBACKで/PATHのCALLBACKを
+- 戻り値: void
+- 実装状況: 実装済み
+- 機能ID (capability): `dir_iterator`
+- 発生し得るエラー: ENOENT, ENOTDIR, EACCES, EPERM, ENOTSUP
+
+▲利用例
+
+{{{#nako3
+CNT = 0
+●(ENTで)カウントCB
+　　CNT = CNT + 1
+ここまで
+「/tmp」を「カウントCB」でディレクトリ列挙時。
+もし、(CNT > 0)ならば
+　　「ディレクトリ列挙成功」と表示。
+ここまで
+### lnako表示結果: ディレクトリ列挙成功
+}}}
+
+▲参考
+
+- [[plugin_lowlevel/ディレクトリ開く]]
+- [[plugin_lowlevel/ディレクトリ次取得]]

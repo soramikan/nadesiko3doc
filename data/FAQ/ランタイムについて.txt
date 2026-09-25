@@ -16,6 +16,13 @@ PC向けで動作するランタイムです。手軽に、PC内でなでしこ�
 
 - 詳しくは、[[なでしこ3(GO版):https://github.com/kujirahand/nadesiko3go/blob/master/README.md]] をご覧ください。
 
+●⚡️ [[lnako]] --- PC向け高速ネイティブ版（Zig + LLVM）
+
+PC向けで動作する高速ネイティブ実装のCLIツールです。公式cnako（Node.js版）比で40〜60倍の圧倒的な起動速度を持ち、Node.js等の外部ランタイムが不要な単一のネイティブ実行ファイル（.exe等）へコンパイル（AOT）できます。
+OSの低レイヤーAPI（[[plugin_lowlevel]]）をサポートし、大学入学共通テスト「情報I」の手順記述標準言語（DNCL / DNCL2）の実行・ビルドにも対応しています。macOS / Linux / Windows に対応しています。
+
+- 詳しくは、[[lnako]] をご覧ください。
+
 ●☕️ [[cnako]] --- PC向けコマンドライン版(Node.js版)
 
 PC向けで動作するランタイムです。Node.jsという技術の上でなでしこを動かすことができます。主にコマンドライン上で使います。

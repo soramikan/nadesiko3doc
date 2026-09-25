@@ -1,0 +1,27 @@
+▲説明
+
+※この命令は、PC向けネイティブ版なでしこ「[[lnako]]」専用の命令です。ブラウザ版（wnako）やNode.js版（cnako）では動作しません。
+
+※この命令は現在策定中（未実装）です。ファイルハンドルのシーク位置を変更します（lseek相当）。WHENCEにはSEEK_SET/SEEK_CUR/SEEK_END相当の指定を行います。
+
+●仕様
+- 対応環境: [[lnako]]専用 (Web/Node.js非対応)
+- プラグイン: [[plugin_lowlevel]]
+- 分類: ストリームIO
+- 助詞: HANDLEをOFFSETでWHENCEを/HANDLEをOFFSETで
+- 戻り値: offset
+- 実装状況: 未実装（策定中・ENOTSUP）
+- 機能ID (capability): `stream_file_io`
+- 発生し得るエラー: EBADF, EINVAL, ENOTSUP
+
+▲利用例
+
+{{{#nako3
+# 実装後のイメージ:
+# Fを10でファイル位置変更。
+}}}
+
+▲参考
+
+- [[plugin_lowlevel/ファイル位置取得]]
+- [[plugin_lowlevel/ファイル開く]]

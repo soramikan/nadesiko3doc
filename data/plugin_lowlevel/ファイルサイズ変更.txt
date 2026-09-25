@@ -1,0 +1,35 @@
+▲説明
+
+※この命令は、PC向けネイティブ版なでしこ「[[lnako]]」専用の命令です。ブラウザ版（wnako）やNode.js版（cnako）では動作しません。
+
+パス指定でファイルのサイズを指定したバイト数SIZEに変更（切り詰め・拡張）します。POSIXのtruncateに相当します。ファイルハンドルを開かずに直接ファイルサイズを変更できます。
+
+●仕様
+- 対応環境: [[lnako]]専用 (Web/Node.js非対応)
+- プラグイン: [[plugin_lowlevel]]
+- 分類: ファイルメタデータ
+- 助詞: PATHをSIZEで/PATHをSIZEに
+- 戻り値: void
+- 実装状況: 実装済み
+- 機能ID (capability): `truncate`
+- 発生し得るエラー: ENOENT, EACCES, EPERM, EISDIR, ENOTDIR, ELOOP, EROFS, ENOSPC, EINVAL, ENOTSUP
+
+▲利用例
+
+{{{#nako3
+H = 「sha256」でハッシュ開始。
+B = Hをハッシュ完了。
+F = 「/tmp/test_truncate.bin」を「w+b」でファイル開く。
+FへBをファイルバイト書く。
+Fをファイル閉じる。
+「/tmp/test_truncate.bin」を8にファイルサイズ変更。
+INFO = 「/tmp/test_truncate.bin」のファイル詳細情報取得。
+「/tmp/test_truncate.bin」をファイルリンク削除。
+INFO[「size」]を表示。
+### lnako表示結果: 8
+}}}
+
+▲参考
+
+- [[plugin_lowlevel/ファイル切詰]]
+- [[plugin_lowlevel/ファイル詳細情報取得]]

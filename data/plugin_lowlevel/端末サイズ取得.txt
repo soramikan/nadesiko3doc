@@ -1,0 +1,27 @@
+▲説明
+
+※この命令は、PC向けネイティブ版なでしこ「[[lnako]]」専用の命令です。ブラウザ版（wnako）やNode.js版（cnako）では動作しません。
+
+指定したストリームSTREAMが接続されている端末画面の行数rowsと列数columnsを持つ辞書を取得します。ioctl TIOCGWINSZに相当します。\n\n※端末（TTY）接続時のみ有効なため、DocTestでは実行結果を検証していません。
+
+●仕様
+- 対応環境: [[lnako]]専用 (Web/Node.js非対応)
+- プラグイン: [[plugin_lowlevel]]
+- 分類: プロセス・端末制御
+- 助詞: STREAMを/STREAMで
+- 戻り値: ttySize
+- 実装状況: 実装済み
+- 機能ID (capability): `tty_isatty`
+- 発生し得るエラー: EINVAL, ENOTSUP
+
+▲利用例
+
+{{{#nako3
+# 端末サイズを取得する例:
+「stdout」を端末サイズ取得。
+SIZE = それ。
+}}}
+
+▲参考
+
+- [[plugin_lowlevel/端末判定]]

@@ -1,0 +1,34 @@
+▲説明
+
+※この命令は、PC向けネイティブ版なでしこ「[[lnako]]」専用の命令です。ブラウザ版（wnako）やNode.js版（cnako）では動作しません。
+
+スパースファイルにおいて、指定オフセットOFFSET以降でホール（空洞領域 SEEK_HOLE）が存在する次の位置を検索し、そのオフセットを返します。
+
+●仕様
+- 対応環境: [[lnako]]専用 (Web/Node.js非対応)
+- プラグイン: [[plugin_lowlevel]]
+- 分類: 高度ファイルシステム
+- 助詞: HANDLEをOFFSETで/HANDLEをOFFSETから
+- 戻り値: offset
+- 実装状況: 実装済み
+- 機能ID (capability): `seek_hole`
+- 発生し得るエラー: EBADF, EINVAL, ENOTSUP
+
+▲利用例
+
+{{{#nako3
+F = 「/tmp/test_seek_hole.bin」を「w+b」でファイル開く。
+Fを0に1024でファイル領域確保。
+Fを0からファイル空洞領域検索。
+POS = それ。
+Fをファイル閉じる。
+「/tmp/test_seek_hole.bin」をファイルリンク削除。
+もし、(POS >= 0)ならば
+　　「空洞領域検索成功」と表示。
+ここまで
+### lnako表示結果: 空洞領域検索成功
+}}}
+
+▲参考
+
+- [[plugin_lowlevel/ファイルデータ領域検索]]

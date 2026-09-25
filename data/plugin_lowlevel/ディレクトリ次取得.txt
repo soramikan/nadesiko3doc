@@ -1,0 +1,32 @@
+▲説明
+
+※この命令は、PC向けネイティブ版なでしこ「[[lnako]]」専用の命令です。ブラウザ版（wnako）やNode.js版（cnako）では動作しません。
+
+ディレクトリハンドルから次のエントリ情報を取得し、名前nameと種別type（"file", "directory", "symlink"など）を持つ辞書を返します。POSIXのreaddirに相当します。最後のエントリに達するとnullを返します。エントリ一覧には"."や".."は含まれません。
+
+●仕様
+- 対応環境: [[lnako]]専用 (Web/Node.js非対応)
+- プラグイン: [[plugin_lowlevel]]
+- 分類: ディレクトリ走査
+- 助詞: HANDLEを/HANDLEの
+- 戻り値: dirEntry
+- 実装状況: 実装済み
+- 機能ID (capability): `dir_iterator`
+- 発生し得るエラー: EBADF, EINVAL, ENOTSUP
+
+▲利用例
+
+{{{#nako3
+DH = 「/tmp」をディレクトリ開く。
+ENT = DHのディレクトリ次取得。
+DHをディレクトリ閉じる。
+もし、(ENT[「name」] != 「」)ならば
+　　「エントリ取得成功」と表示。
+ここまで
+### lnako表示結果: エントリ取得成功
+}}}
+
+▲参考
+
+- [[plugin_lowlevel/ディレクトリ開く]]
+- [[plugin_lowlevel/ディレクトリ閉じる]]

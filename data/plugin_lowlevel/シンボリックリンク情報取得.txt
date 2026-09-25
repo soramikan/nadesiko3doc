@@ -1,0 +1,33 @@
+▲説明
+
+※この命令は、PC向けネイティブ版なでしこ「[[lnako]]」専用の命令です。ブラウザ版（wnako）やNode.js版（cnako）では動作しません。
+
+指定パスのシンボリックリンク自体の詳細情報（lstat）を取得し、辞書形式で返します。ファイル詳細情報取得（stat）とは異なり、シンボリックリンク自体を追跡せず、リンクそのものの属性情報を返します。
+
+●仕様
+- 対応環境: [[lnako]]専用 (Web/Node.js非対応)
+- プラグイン: [[plugin_lowlevel]]
+- 分類: ファイルシステム
+- 助詞: PATHを/PATHの/PATHから
+- 戻り値: stat
+- 実装状況: 実装済み
+- 機能ID (capability): `lstat`
+- 発生し得るエラー: ENOENT, EACCES, EPERM, ENOTDIR, ELOOP, EINVAL, ENOTSUP
+
+▲利用例
+
+{{{#nako3
+F = 「/tmp/test_lstat_src.txt」を「w+b」でファイル開く。
+Fをファイル閉じる。
+「/tmp/test_lstat_src.txt」を「/tmp/test_lstat_link.txt」へシンボリックリンク作成。
+LINFO = 「/tmp/test_lstat_link.txt」のシンボリックリンク情報取得。
+「/tmp/test_lstat_link.txt」をファイルリンク削除。
+「/tmp/test_lstat_src.txt」をファイルリンク削除。
+LINFO[「kind」]を表示。
+### lnako表示結果: symlink
+}}}
+
+▲参考
+
+- [[plugin_lowlevel/ファイル詳細情報取得]]
+- [[plugin_lowlevel/シンボリックリンク作成]]

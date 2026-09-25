@@ -1,0 +1,135 @@
+■ [[命令一覧]] / [[機能順:命令一覧/機能順]] / lnako - 高速ネイティブ版
+
+『lnako（エルナコ）』は、日本語プログラミング言語「なでしこ3」を高速に実行し、単一のネイティブ実行ファイルへコンパイル（AOT）できるCLIツールです。
+ZigとLLVMでネイティブ実装されており、公式なでしこ3（v3.7.24）互換を基準に開発されています。
+macOS（arm64）・Linux（x86_64）・Windows（x86_64）のマルチプラットフォームに対応し、大学入学共通テスト「情報I」の手順記述標準言語（DNCL / DNCL2）の実行・ビルドにも対応しています。
+
+{{{#nako3
+「こんにちは、lnakoです」と表示。
+### lnako表示結果: こんにちは、lnakoです
+}}}
+
+● lnakoの主な特徴
+
+▲ 1. 圧倒的な高速起動とパフォーマンス
+公式cnako（Node.js版）と比較して、起動時間は約40〜60倍高速です。ちょっとしたスクリプトの実行やコマンドラインツールの実行も瞬時に完了します。
+
+▲ 2. 単一のネイティブ実行ファイルを生成可能（外部ランタイム不要）
+「lnako build」コマンドを使用することで、Node.jsやZigなどのランタイムを必要としない、単体で動作するスタンドアロンなネイティブ実行ファイル（.exeなど）を作成できます。作成したプログラムを他のPCへ配布したい場合にも最適です。
+
+▲ 3. OSネイティブの低レイヤーAPI（plugin_lowlevel）を標準搭載
+ファイル詳細情報（stat/lstat）、シンボリックリンクやハードリンクの操作、逐次ディレクトリスキャン、ファイルクローン（reflink）、ハッシュ・ストリーム処理、POSIXパーミッション・所有者管理、外部プロセス起動・シグナル送信、端末サイズ取得など、OSネイティブの低レイヤー命令（全63命令）を多数提供しています。詳しくは [[低レイヤーAPIプラグイン:plugin_lowlevel]] をご覧ください。
+
+▲ 4. 高い公式互換性とDNCL/DNCL2対応
+標準cnako 527命令中523命令を完全ネイティブ実装しています。また、高校「情報I」の大学入学共通テスト手順記述標準言語（DNCLおよびDNCL2）をそのまま実行・ビルドできます。
+
+● 実行速度・性能比較
+
+以下は、公式cnako（Node.js版）、gonako（Go版）、lnako（インタープリター／AOTコンパイル）の代表的なベンチマーク比較です（Linux x86_64環境、ミリ秒単位）。
+
+{{{#markdown
+| 分野 | テスト内容 | cnako (Node.js) | gonako (Go) | lnako (インタープリター) | cnako比 | lnako (AOTコンパイル) | cnako比 |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| **起動速度** | `startup-hello` | 106.5 ms | 6.6 ms | 2.5 ms | **約43倍** | **1.8 ms** | **約60倍** |
+| **関数呼出し** | `function-call` | 169.7 ms | 116.9 ms | 310.4 ms | 0.55倍 | **33.0 ms** | **約5.1倍** |
+| **浮動小数点** | `nbody` | 158.7 ms | 47.1 ms | 391.5 ms | 0.41倍 | **15.1 ms** | **約10.5倍** |
+| **辞書検索** | `hash-lookup` | 142.2 ms | 72.5 ms | 481.7 ms | 0.30倍 | **50.4 ms** | **約2.8倍** |
+| **文字列連結** | `string-concat` | 117.8 ms | 22.8 ms | 56.5 ms | **約2.1倍** | **28.2 ms** | **約4.2倍** |
+| **メモリ・GC** | `binary-trees` | 163.5 ms | 51.7 ms | 48.8 ms | **約3.4倍** | **17.2 ms** | **約9.5倍** |
+| **単語集計** | `word-count` | 125.4 ms | 37.1 ms | 251.9 ms | 0.50倍 | **15.2 ms** | **約8.3倍** |
+| **JSON変換** | `json-transform` | 128.5 ms | 23.0 ms | 67.2 ms | **約1.9倍** | **7.1 ms** | **約18.0倍** |
+}}}
+
+● インストール方法
+
+お使いのOSや用途に合わせて、Homebrewまたは配布アーカイブから導入してください。
+
+▲ macOSの場合（Homebrewで簡単導入）
+
+Homebrewが導入されている環境では、以下のコマンドで簡単にインストールできます。
+
+{{{
+brew tap soramikan/tap
+brew install lnako
+lnako --version
+}}}
+
+▲ Linux・Windows・手動アーカイブ導入
+
+[[GitHub Releases:https://github.com/soramikan/lnako/releases]] より最新の配布アーカイブをダウンロードし、展開したフォルダの「bin」ディレクトリを環境変数PATHに追加してください。
+
+- **standard版**：プログラムの実行（run）や構文検査（check）を手軽に始めたい方向けの軽量版です。コンパイルに必要なLLVMツールチェーンは後からコマンド一つで自動追加できます。
+- **full版（-full）**：LLVM/LLDを同梱しています。追加ダウンロードなしで、オフライン環境でも即座にネイティブ実行ファイルを生成できます。
+
+● 基本的な使い方
+
+「hello.nako3」というファイルを作成します。
+
+{{{
+「こんにちは、世界！」と表示する。
+}}}
+
+▲ 1. 構文・意味チェック（check）
+実行前にエラーがないかを検査します。
+
+{{{
+lnako check hello.nako3
+}}}
+
+▲ 2. スクリプトとして直接実行（run）
+インタープリターで高速に直接実行します。
+
+{{{
+lnako run hello.nako3
+}}}
+
+▲ 3. 単体ネイティブ実行ファイルを生成する（build）
+LLVMによる最適化を行ったネイティブバイナリを生成します。
+
+{{{
+# standard版またはHomebrew版で初めてコンパイルを行う場合（初回のみ）
+lnako toolchain install
+
+# 最適化レベル -O2 で実行ファイルを生成（Windowsの場合は -o hello.exe）
+lnako build hello.nako3 -o hello -O2
+
+# 生成されたバイナリを実行（Node.jsなどの外部ランタイム不要）
+./hello
+}}}
+
+● 応用機能
+
+▲ 大学入試共通テスト「情報I」手順記述標準言語（DNCL / DNCL2）
+大学入学共通テスト「情報I」で用いられるDNCLおよびDNCL2の実行とコンパイルに完全対応しています。
+
+{{{
+# DNCLファイルの実行・ビルド
+lnako run program.dncl
+lnako build program.dncl -o program -O2
+
+# .nako3ファイルをDNCL2として実行
+lnako run program.nako3 --dncl2
+}}}
+
+▲ JavaScript互換モード（--compat-js）
+公式なでしこ3のうち、JavaScript固有の機能（「JS実行」や「JSグローバル取得」など）を使用する場合は、「--compat-js」フラグを指定します。
+
+{{{
+lnako run script.nako3 --compat-js
+lnako build script.nako3 --compat-js -o script -O2
+}}}
+
+● 命令一覧・リファレンス
+
+lnakoで利用できる命令の一覧や低レイヤーAPIのリファレンスです。
+
+- [[lnako命令一覧（全命令一覧）:lnako/命令一覧]]
+- [[低レイヤーAPIプラグイン（plugin_lowlevel）:plugin_lowlevel]]
+- [[公式リポジトリ（GitHub）:https://github.com/soramikan/lnako]]
+
+#nako3doc(list-func,lnako)
+
+● 参考
+
+- [[命令一覧]] / [[機能順:命令一覧/機能順]]
+- [[FAQ/ランタイムについて]]

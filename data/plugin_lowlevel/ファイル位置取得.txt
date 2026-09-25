@@ -1,0 +1,26 @@
+▲説明
+
+※この命令は、PC向けネイティブ版なでしこ「[[lnako]]」専用の命令です。ブラウザ版（wnako）やNode.js版（cnako）では動作しません。
+
+※この命令は現在策定中（未実装）です。ファイルハンドルの現在のシーク位置（オフセット）を取得します。
+
+●仕様
+- 対応環境: [[lnako]]専用 (Web/Node.js非対応)
+- プラグイン: [[plugin_lowlevel]]
+- 分類: ストリームIO
+- 助詞: HANDLEを/HANDLEの
+- 戻り値: offset
+- 実装状況: 未実装（策定中・ENOTSUP）
+- 機能ID (capability): `stream_file_io`
+- 発生し得るエラー: EBADF
+
+▲利用例
+
+{{{#nako3
+# 実装後のイメージ:
+# POS = Fのファイル位置取得。
+}}}
+
+▲参考
+
+- [[plugin_lowlevel/ファイル位置変更]]

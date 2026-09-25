@@ -1,0 +1,30 @@
+▲説明
+
+※この命令は、PC向けネイティブ版なでしこ「[[lnako]]」専用の命令です。ブラウザ版（wnako）やNode.js版（cnako）では動作しません。
+
+ロケールと言語規則（Unicode Collation）を考慮して文字列Aと文字列Bを比較照合します。A < Bならば負の整数、A = Bならば0、A > Bならば正の整数を返します。OPTIONSには照合感度や大文字小文字の扱いなどの照合オプションを指定できます。
+
+●仕様
+- 対応環境: [[lnako]]専用 (Web/Node.js非対応)
+- プラグイン: [[plugin_lowlevel]]
+- 分類: 国際化・表示幅
+- 助詞: AをBとOPTIONSで/AをBと
+- 戻り値: number
+- 実装状況: 実装済み
+- 機能ID (capability): `locale_collate`
+- 発生し得るエラー: EINVAL, ENOTSUP
+
+▲利用例
+
+{{{#nako3
+「apple」を「banana」とロケール文字列比較。
+C = それ。
+もし、(C < 0)ならば
+　　「比較成功」と表示。
+ここまで
+### lnako表示結果: 比較成功
+}}}
+
+▲参考
+
+- [[plugin_lowlevel/文字表示幅取得]]

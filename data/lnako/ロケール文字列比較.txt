@@ -1,0 +1,1 @@
+#include(plugin_lowlevel/ロケール文字列比較)

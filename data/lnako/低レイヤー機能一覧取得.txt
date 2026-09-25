@@ -1,0 +1,1 @@
+#include(plugin_lowlevel/低レイヤー機能一覧取得)
